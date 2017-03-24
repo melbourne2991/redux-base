@@ -1,35 +1,29 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: [
-    path.join(__dirname, 'app/src/js/index.js'),
-    'webpack-hot-middleware/client'
-  ],
+  entry:  path.join(__dirname, 'src/index.js'),
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/assets/'
   },
-  plugins: [
-    new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin()
-  ],
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: '/node_modules/',
-        include: __dirname
+        include: path.join(__dirname, 'src')
       },
       {
         test: /\.css?$/,
-        loaders: ['style', 'raw'],
-        include: __dirname
+        loaders: ['style-loader', 'raw-loader'],
+        include: path.join(__dirname, 'src')
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin()
+  ]
 }

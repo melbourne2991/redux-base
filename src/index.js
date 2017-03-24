@@ -6,12 +6,14 @@ import { Ui } from './components'
 import configureStore from './configureStore'
 
 const store = configureStore()
+const mountPoint = document.createElement('div');
+document.body.appendChild(mountPoint);
 
 render(
   <Provider store={store}>
     <Ui/>
   </Provider>, 
-  document.getElementById('app'))
+  mountPoint)
 
 if (module.hot) {
   module.hot.accept();
