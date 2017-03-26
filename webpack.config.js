@@ -9,17 +9,15 @@ module.exports = {
   },
   devtool: 'source-map',
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
-        exclude: '/node_modules/',
-        include: path.join(__dirname, 'src')
+        use: ['babel-loader'],
+        exclude: /node_modules/
       },
       {
-        test: /\.css?$/,
-        loaders: ['style-loader', 'raw-loader'],
-        include: path.join(__dirname, 'src')
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader']
       }
     ]
   },
