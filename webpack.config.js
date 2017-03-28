@@ -18,7 +18,29 @@ module.exports = {
       {
         test: /\.css$/,
         use: [ 'style-loader', 'css-loader']
-      }
+      },
+      {
+        test: /^(?!global).*\.scss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader', options: { modules: true } },
+          { loader: 'sass-loader'}
+        ]
+      },
+      {
+        test: /^global\.scss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader', options: { modules: false } },
+          { loader: 'sass-loader'}
+        ]
+      },
+      {
+        test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
+        use: [
+          { loader: 'url-loader' }
+        ]
+      }      
     ]
   },
   plugins: [
